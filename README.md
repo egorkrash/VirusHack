@@ -60,27 +60,7 @@ or
 
 #### get time series of given target with forecasting (for the last 24 hours)
 
-#### /get_real_and_pred_data (POST)
-
-##### request
-
-parameters (json body):
-
-```
-{
-"target" : target
-}
-```
-possible targets:
-
-```
-['start_stop_alige_count_', 'start_stop_alige_count_Alive',
- 'start_stop_alige_count_Start', 'start_stop_alige_count_Stop',
- 'type__count_Billing-Accounting', 'type__count_Billing-Authentication',
- 'mean_delay', 'mean_input_trafic', 'mean_output_trafic',
- 'count_failed']
- 
- ```
+#### /get_real_and_pred_data (GET)
  
 ##### response
 
@@ -88,8 +68,26 @@ possible targets:
 json
 { 
 "xticks" : [],
-"target" : [],
-"target_pred" : []
+"start_stop_alige_count_" : [],
+"start_stop_alige_count_Alive": [],
+"start_stop_alige_count_Start": [],
+"start_stop_alige_count_Stop": [],
+"type__count_Billing-Accounting": [],
+"type__count_Billing-Authentication": [],
+"mean_delay": [],
+"mean_input_trafic": [],
+"mean_output_trafic": [],
+"count_failed": [],
+"start_stop_alige_count__pred" : [],
+"start_stop_alige_count_Alive_pred": [],
+"start_stop_alige_count_Start_pred": [],
+"start_stop_alige_count_Stop_pred": [],
+"type__count_Billing-Accounting_pred": [],
+"type__count_Billing-Authentication_pred": [],
+"mean_delay_pred": [],
+"mean_input_trafic_pred": [],
+"mean_output_trafic"_pred: [],
+"count_failed_pred": []
 }
 ```
 
@@ -101,28 +99,44 @@ xticks has size of `n` and target_pred has a size of `n`, but target has a size 
 
 #### get time series of snmp data for the last hour
 
-#### /get_snmp_data (POST)
+#### /get_snmp_data (GET)
 
-##### request
-
-parameters (json body):
-
-```
-{
-"target" : target
-}
-```
-possible targets:
-
-```
-['temp', 'cpu', 'mem']
-```
- 
 ##### response
 
 ```
 { 
 "xticks" : [],
-"target" : [],
+"temp" : [],
+"mem" : [],
+"cpu" : []
+}
+```
+
+#### Get alert users
+
+#### /get_alert_users (POST)
+
+#### request
+
+```
+{
+"hour": hour
+}
+```
+sample value:
+
+`"hour": "05-03 00"`
+
+
+
+
+##### response
+
+```
+{ 
+"failed_alert" : [list_of_users, list_of_values],
+"stops_alert" : [list_of_users, list_of_values],
+"tr_inp_zero_alert" : [list_of_users, list_of_values],
+"tr_out_zero_alert" : [list_of_users, list_of_values]
 }
 ```
