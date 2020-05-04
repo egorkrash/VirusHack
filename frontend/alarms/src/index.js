@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './index.css';
-import App from './App';
+import Alarms from './containers/Alerts';
 import * as serviceWorker from './serviceWorker';
+import SnmpMonitor from './containers/SnmpMonitor';
+import RadiusMonitor from './containers/RadiusMonitor';
+import NotFoundPage from "./pages/NotFound";
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router>
+    <Switch>
+      <Route path="/snmp" component={SnmpMonitor} />
+      <Route path="/radius" component={RadiusMonitor} />
+      <Route path="/" component={Alarms} exact />
+      <Route component={NotFoundPage}/>
+    </Switch>
+  </Router>,
   document.getElementById('root')
 );
 

@@ -1,84 +1,78 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import React, {useEffect, useState} from 'react';
 import { Col, Container, Row, Alert, Button } from "reactstrap";
-import './App.css';
-import data_alarms from "./data/alarms";
-import defaults from "./config";
+import defaults from "../../config";
+import Header from "../../components/Header";
 
 
-async function fetch_real_and_pred_data({target_name}) {
-  const requestOptions = {
-    method: 'POST',
-    body: JSON.stringify({"target": target_name})
-  };
-
-  fetch('http://localhost:4500/get_real_and_pred_data', requestOptions)
-    .then(response => response.json())
-    .then(data => {
-      alert(1);
-      alert(data['xticks'].join(' '))
-      // this.setState({ postId: data.id })
-    });
-}
-
-
-function Alerts() {
-  const { current, history } = data_alarms;
-
-  const [state, set_state] = useState({a: 1})
-
-
-
-
-
-
-
-  // fetch('localhost/get_real_and_pred_data')
-  //   .then(response => {
-  //     // alert(1)
-  //     return response.json()
-  //   }).then( data => {
-  //     alert(data)
-  //   });
-
-
-
-  let alarms_current = [];
-  for (const current_alarm of current) {
-    const color = defaults.typeAlarm_to_color[current_alarm.alarm_type];
-    alarms_current.push(
-      <row>
+function get_alarm_bar({data, title}) {
+  // alert(JSON.stringify(users_values));
+  const [users, values] = data;
+  let res = [];
+  for (let i=0; i<users.length; i++) {
+    res.push(
+      <Row>
         <Button
-          color={color}
-          style={{width: "100%", margin: "5px"}}
-          href={`/alarm?id=${current_alarm.id}`}
+          style={{width: '100%', marginBottom:3, marginTop:3, marginLeft:6, marginRight:6}}
+          color={"danger"}
         >
-
-          <span style={{float:"left"}}>
-            <h4 style={{float:"left"}}> <b> "{current_alarm.what}" </b> is <b> {current_alarm.value} </b> </h4>
-            <br/>
-            <text style={{float:"left"}}> Predict {current_alarm.predict} </text>
-            <br/>
-            <text style={{float:"left"}}> Normal range {current_alarm.normal_diapason} </text>
-          </span>
-          <span style={{float:"right"}}>
-            <text style={{float:"right"}}> {current_alarm.alarm_type} </text>
-            <br/><br/><br/>
-            <text style={{float:"right"}}> {current_alarm.date_begin} </text>
-          </span>​
-          <br/>
+          <span style={{float: "left"}}>{users[i]}</span>
+          <span style={{float: "right"}}><b>{values[i]}</b></span>
         </Button>
-      </row>
+      </Row>
     )
   }
-
   return (
-    <Container>
-      <Col>
-        {alarms_current}
-      </Col>
-    </Container>
+    <Col style={{width: '90%', backgroundColor: '#EFEFEF', margin: 3}}>
+      <p><b> {title} </b></p>
+      {res}
+    </Col>
   );
 }
+
+
+async function fetch_data({set_data, hour}) {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({hour: hour.hour})
+  };
+  fetch('http://localhost:4500/get_alert_users', requestOptions)
+    .then(response => response.json())
+    .then(data => set_data(data));
+}
+
+
+const Alerts = () => {
+  const [data, set_data] = useState({
+    failed_alert: [[], []],
+    stops_alert: [[], []],
+    tr_inp_zero_alert: [[], []],
+    tr_out_zero_alert: [[], []]
+  });
+  const [hour, set_hour] = useState({hour: '05-03 00'})
+
+  useEffect(() => {
+    fetch_data({set_data, hour}).then();
+  },   [1]);
+
+
+  // alert(JSON.stringify(data)); f
+  const columns_alerts = [
+    get_alarm_bar({data: data.failed_alert, title: "FAILED in auth"}),
+    get_alarm_bar({data: data.stops_alert, title: "Count stops"}),
+    get_alarm_bar({data: data.tr_inp_zero_alert, title: "Zero input traffic"}),
+    get_alarm_bar({data: data.tr_out_zero_alert, title: "Zero output traffic"})
+  ];
+
+
+  return (
+    <div>
+      <Header/>
+      <Container>
+        <Row> {columns_alerts} </Row>
+      </Container>
+    </div>
+  );
+};
 
 export default Alerts;
