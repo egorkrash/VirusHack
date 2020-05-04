@@ -60,7 +60,22 @@ or
 
 #### get time series of given target with forecasting (for the last 24 hours)
 
-#### /get_real_and_pred_data (GET)
+#### /get_real_and_pred_data (POST)
+
+##### request
+
+```
+json
+{
+"date": date 
+}
+```
+available 24 hours from '2020-04-30 00:00:00' untill '2020-04-30 23:00:00'
+
+example:
+
+`date = 2020-04-30 16:00:00`
+
  
 ##### response
 
@@ -68,8 +83,6 @@ or
 json
 { 
 "xticks" : [],
-"start_stop_alige_count_" : [],
-"start_stop_alige_count_Alive": [],
 "start_stop_alige_count_Start": [],
 "start_stop_alige_count_Stop": [],
 "type__count_Billing-Accounting": [],
@@ -78,16 +91,14 @@ json
 "mean_input_trafic": [],
 "mean_output_trafic": [],
 "count_failed": [],
-"start_stop_alige_count__pred" : [],
-"start_stop_alige_count_Alive_pred": [],
 "start_stop_alige_count_Start_pred": [],
 "start_stop_alige_count_Stop_pred": [],
 "type__count_Billing-Accounting_pred": [],
 "type__count_Billing-Authentication_pred": [],
 "mean_delay_pred": [],
 "mean_input_trafic_pred": [],
-"mean_output_trafic"_pred: [],
-"count_failed_pred": []
+"mean_output_trafic_pred": [],
+"count_failed_pred": [],
 }
 ```
 
