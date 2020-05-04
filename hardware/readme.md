@@ -1,0 +1,19 @@
+# Запуск мониторинга оборудования с эмулятором SNMP Traps
+## Запуск докеризованных сервисов
+```
+docker network create --driver bridge prometheus
+docker run --network=prometheus -d -p 9091:9091 prom/pushgateway
+```
+Запускаем эмулятор SNMP TRAP (этот процесс должен работать постоянно без остановки):
+```
+while true; do ./push-metrics.py ;  sleep 5 ; done
+```
+После этого нужно узнать ip адрес контейнера пуш шлюза при помощи команды `docker network inspect prometheus` и заменить на него ip адрес в последней строчке файла `prometheus.yml`. После этого можно запускать контейнеры с `Prometheus` и `Grafana`:
+```
+docker run --network=prometheus -d -p 9090:9090 -v <full path to file>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+docker run --network=prometheus -d -p 3000:3000 grafana/grafana
+```
+## Работа с Grafana
+Заходим в браузере в `Grafana` на `localhost:3000` и там подключаем `Prometheus` в качестве источника данных. Адрес сервера `Prometheus` вводим как `http://ip:9090`, где `ip` - это адрес контейнера `Prometheus`, который можно опять же увидеть при помощи команды `docker network inspect prometheus` (не путать с контейнером пуш шлюза).
+
+Далее в `Grafana` создаём дэшборд и добавляем в него три панели с запросом, содержащим только имя метрики. По одной панели на каждую из метрик - `temperature`, `cpu_load`, `mem_load`). Выставляем обновление на 10 секунд, подбираем глубину истории для отображения метрик. Имя панели можно изменить через JSON панели.
