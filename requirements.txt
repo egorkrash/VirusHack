@@ -1,3 +1,9 @@
+catboost==0.22
 flask
+matplotlib
 pandas
 prometheus_client
+pytelegrambotapi
+scikit-learn
+telebot
+tqdm
