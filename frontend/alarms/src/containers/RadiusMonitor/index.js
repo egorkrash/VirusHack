@@ -43,7 +43,11 @@ function RadiusMonitor() {
   const [state, set_state] = useState({data: []});
 
   if (state.data.length === 0) {
-    fetch('http://localhost:4500/get_real_and_pred_data', {method: 'POST'})
+    const fetchParams = {
+      method: 'GET',
+      body: JSON.stringify({})
+    }
+    fetch('http://localhost:4500/get_real_and_pred_data', )
       .then(response => response.json())
       .then(data => {
         const { xticks, temp, mem, cpu } = data;
