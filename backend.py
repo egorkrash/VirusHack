@@ -10,32 +10,39 @@ DATA_PATH = 'data/'
 time_series = pd.read_csv(DATA_PATH + 'final_data.csv')
 time_series_pred = pd.read_csv(DATA_PATH + 'pred_data.csv')
 
+ts_targets = time_series.columns[1:]
+
 
 snmp_data = pd.read_csv(DATA_PATH + 'snmp_data.csv', parse_dates=['time'])
 
 snmp_data = snmp_data[snmp_data['time'] >= pd.to_datetime('2020-04-29 22:59:45')]
+snmp_targets = snmp_data.columns[1:]
 
 
 app = Flask(__name__)
 
-@app.route('/get_real_and_pred_data', methods=['POST'])
+@app.route('/get_real_and_pred_data', methods=['GET'])
 def get_real_and_pred_data():
     """
     Get data of time series and forecasting of given target.
     """
-    if request.method == 'POST':
+    if request.method == 'GET':
         entry = json.loads(request.data)
-        
-        target = entry['target']
-        
-        target_val = list(time_series[target])
-        target_pred_val = list(time_series_pred[target])
-        xticks = list(time_series_pred['date'])
         
         res = {}
         
-        res['target'] = target_val
-        res['target_pred'] = target_pred_val
+        
+        for target in ts_targets:
+      
+            target_val = list(time_series[target])
+            target_pred_val = list(time_series_pred[target])
+            res[target] = target_val
+            res[target + '_pred'] = target_pred_val
+        
+        xticks = list(time_series_pred['date'])
+        
+ 
+        
         res['xticks'] = xticks
         
         json_data = json.dumps(res)
@@ -50,22 +57,25 @@ def get_real_and_pred_data():
         return 'only post request is allowed'
     
     
-@app.route('/get_snmp_data', methods=['POST'])
+@app.route('/get_snmp_data', methods=['GET'])
 def get_snmp_data():
     """
     Get data of time series of snmp.
     """
-    if request.method == 'POST':
+    if request.method == 'GET':
         entry = json.loads(request.data)
         
-        target = entry['target']
         
-        target_val = list(snmp_data[target])
         xticks = list(map(str, snmp_data['time']))
         
         res = {}
         
-        res['target'] = target_val
+        for target in snmp_targets:
+            
+            res[target] = list(snmp_data[target])
+            
+            
+        xticks = list(map(str, snmp_data['time']))
         res['xticks'] = xticks
         
         json_data = json.dumps(res)
