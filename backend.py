@@ -5,13 +5,29 @@ import pickle as pkl
 from utils import get_alert_dict
 from flask import Flask, request, Response, send_file
 
+from time_series_forecasting.forecasting import make_predictions, load_models
+
+FORECASTING_TARGETS = [
+    "start_stop_alige_count_Start",
+    "start_stop_alige_count_Stop",
+    "type__count_Billing-Accounting",
+    "type__count_Billing-Authentication",
+    "mean_delay",
+    "mean_input_trafic",
+    "mean_output_trafic",
+    "count_failed"
+   ]
+
+
+# ML models
+forecasting_models = load_models(FORECASTING_TARGETS, path='time_series_forecasting/models/')
+
+# additional data
 
 DATA_PATH = 'data/'
 
-time_series = pd.read_csv(DATA_PATH + 'final_data.csv')
-time_series_pred = pd.read_csv(DATA_PATH + 'pred_data.csv')
-
-ts_targets = time_series.columns[1:]
+time_series_logs = pd.read_csv(DATA_PATH + 'gb_total.csv')
+time_series_logs['date'] = pd.to_datetime(time_series_logs['date'])
 
 data_alert = pd.read_csv(DATA_PATH + 'gb_userlogin_hour.csv')
 data_alert = data_alert[~((data_alert.input_trafic == 0) & (data_alert.output_trafic == 0))]
@@ -25,24 +41,30 @@ snmp_targets = snmp_data.columns[1:]
 
 app = Flask(__name__)
 
-@app.route('/get_real_and_pred_data', methods=['GET'])
+@app.route('/get_real_and_pred_data', methods=['POST'])
 def get_real_and_pred_data():
     """
     Get data of time series and forecasting of given target.
     """
-    if request.method == 'GET':
+    if request.method == 'POST':
         
+        entry = json.loads(request.data)
+        
+        date = entry['date']
+
         res = {}
+
+        time_series, time_series_pred = make_predictions(time_series_logs, forecasting_models, 
+                                                         FORECASTING_TARGETS, date)
         
-        
-        for target in ts_targets:
+        for target in FORECASTING_TARGETS:
       
             target_val = list(time_series[target])
             target_pred_val = list(time_series_pred[target])
             res[target] = target_val
             res[target + '_pred'] = target_pred_val
         
-        xticks = list(time_series_pred['date'])
+        xticks = list(map(str, time_series_pred['date']))
         
  
         
