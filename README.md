@@ -33,3 +33,96 @@ Cервис мониторинга и прогнозирования абоне�
 #### Как может работать:
 составление дерева сетевых инцидентов и условий для их возникновения, анализ мониторинга сетевого оборудования, анализ состояния обслуживающего персонала.
 
+## Structure of product
+
+### Dataflow part
+
+![](dataflow.png)
+
+### Backend part
+
+![](backend_diagram.png)
+
+## Web-server (Flask)
+
+### Run server
+
+to run server run in root directory (port 4500):
+
+`python backend.py`
+
+or
+
+`python3 backend.py`
+
+
+### API documentation
+
+#### get time series of given target with forecasting (for the last 24 hours)
+
+#### /get_real_and_pred_data (POST)
+
+##### request
+
+parameters (json body):
+
+```
+{
+"target" : target
+}
+```
+possible targets:
+
+```
+['start_stop_alige_count_', 'start_stop_alige_count_Alive',
+ 'start_stop_alige_count_Start', 'start_stop_alige_count_Stop',
+ 'type__count_Billing-Accounting', 'type__count_Billing-Authentication',
+ 'mean_delay', 'mean_input_trafic', 'mean_output_trafic',
+ 'count_failed']
+ 
+ ```
+ 
+##### response
+
+```
+json
+{ 
+"xticks" : [],
+"target" : [],
+"target_pred" : []
+}
+```
+
+pay attention:
+
+xticks has size of `n` and target_pred has a size of `n`, but target has a size of `n-1` because target has all real values of time series and target_pred has a size of the history of predicted values and forecasting for the next hour
+
+
+
+#### get time series of snmp data for the last hour
+
+#### /get_snmp_data (POST)
+
+##### request
+
+parameters (json body):
+
+```
+{
+"target" : target
+}
+```
+possible targets:
+
+```
+['temp', 'cpu', 'mem']
+```
+ 
+##### response
+
+```
+{ 
+"xticks" : [],
+"target" : [],
+}
+```
