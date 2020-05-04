@@ -25,6 +25,13 @@ def get_alert_dict(data, hour,
     del data, data_last_hour
     
     resdict = defaultdict(lambda: [[], []])
+    resdict['failed_alert']
+    resdict['stops_alert']
+    resdict['tr_inp_zero_alert']
+    resdict['tr_out_zero_alert']
+    resdict['tr_in_max_alert']
+    resdict['tr_out_max_alert']
+
     for i in range(len(logins)):
         if mask_failed[i]:
             resdict['failed_alert'][0].append(logins[i])
