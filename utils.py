@@ -28,25 +28,25 @@ def get_alert_dict(data, hour,
     for i in range(len(logins)):
         if mask_failed[i]:
             resdict['failed_alert'][0].append(logins[i])
-            resdict['failed_alert'][1].append(failed[i])
+            resdict['failed_alert'][1].append(int(failed[i]))
 
         if mask_stops[i]:
             resdict['stops_alert'][0].append(logins[i])
-            resdict['stops_alert'][1].append(stops[i])
+            resdict['stops_alert'][1].append(int(stops[i]))
         if mask_tr_inp_zero[i]:
             resdict['tr_inp_zero_alert'][0].append(logins[i])
-            resdict['tr_inp_zero_alert'][1].append(trafic_input_zero[i])
+            resdict['tr_inp_zero_alert'][1].append(int(trafic_input_zero[i]))
 
         if mask_tr_out_zero[i]:
             resdict['tr_out_zero_alert'][0].append(logins[i])
-            resdict['tr_out_zero_alert'][1].append(trafic_output_zero[i])
+            resdict['tr_out_zero_alert'][1].append(int(trafic_output_zero[i]))
             
         if mask_tr_in_max[i]: 
             resdict['tr_in_max_alert'][0].append(logins[i])
-            resdict['tr_in_max_alert'][1].append(input_trafic[i])
+            resdict['tr_in_max_alert'][1].append(int(input_trafic[i]))
             
         if mask_tr_out_max[i]:
             resdict['tr_out_max_alert'][0].append(logins[i])
-            resdict['tr_out_max_alert'][1].append(output_trafic[i])
+            resdict['tr_out_max_alert'][1].append(int(output_trafic[i]))
             
     return resdict

@@ -51,13 +51,11 @@ def get_real_and_pred_data():
         json_data = json.dumps(res)
         resp = Response(json_data, status=200, mimetype='application/json')
         resp.headers = {'Access-Control-Allow-Origin': '*'}
-        
-        print(res)
-        
+
         return resp
         
     else:
-        return 'only post request is allowed'
+        return 'only get request is allowed'
     
     
 @app.route('/get_snmp_data', methods=['GET'])
@@ -86,7 +84,7 @@ def get_snmp_data():
         return resp
         
     else:
-        return 'only post request is allowed'
+        return 'only get request is allowed'
 
     
 @app.route('/get_alert_users', methods=['POST'])
@@ -94,25 +92,16 @@ def get_alert_users():
     """
     Get data of alert users.
     """
-    if request.method == 'GET':
+    if request.method == 'POST':
         entry = json.loads(request.data)
         
         hour = entry['hour']
         
         
-        d = get_alert_dict(alert_data, hour)
+        alerts = get_alert_dict(data_alert, hour)
         
-        res = {}
         
-        for target in snmp_targets:
-            
-            res[target] = list(snmp_data[target])
-            
-            
-        xticks = list(map(str, snmp_data['time']))
-        res['xticks'] = xticks
-        
-        json_data = json.dumps(res)
+        json_data = json.dumps(alerts)
         resp = Response(json_data, status=200, mimetype='application/json')
         resp.headers = {'Access-Control-Allow-Origin': '*'}
         
