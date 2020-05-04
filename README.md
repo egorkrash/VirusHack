@@ -112,8 +112,9 @@ xticks has size of `n` and target_pred has a size of `n`, but target has a size 
 }
 ```
 
+#### Get alert users
 
-#### /get_alert_commutators (POST)
+#### /get_alert_users (POST)
 
 #### request
 
@@ -133,9 +134,9 @@ sample value:
 
 ```
 { 
-"failed_alert" : [list_of_communitators, list_of_values],
-"stops_alert" : [list_of_communitators, list_of_values],
-"tr_inp_zero_alert" : [list_of_communitators, list_of_values],
-"tr_out_zero_alert" : [list_of_communitators, list_of_values]
+"failed_alert" : [list_of_users, list_of_values],
+"stops_alert" : [list_of_users, list_of_values],
+"tr_inp_zero_alert" : [list_of_users, list_of_values],
+"tr_out_zero_alert" : [list_of_users, list_of_values]
 }
 ```
