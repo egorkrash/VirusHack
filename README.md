@@ -111,3 +111,31 @@ xticks has size of `n` and target_pred has a size of `n`, but target has a size 
 "cpu" : []
 }
 ```
+
+
+#### /get_alert_commutators (POST)
+
+#### request
+
+```
+{
+"hour": hour
+}
+```
+sample value:
+
+`"hour": "05-03 00"`
+
+
+
+
+##### response
+
+```
+{ 
+"failed_alert" : [list_of_communitators, list_of_values],
+"stops_alert" : [list_of_communitators, list_of_values],
+"tr_inp_zero_alert" : [list_of_communitators, list_of_values],
+"tr_out_zero_alert" : [list_of_communitators, list_of_values]
+}
+```
