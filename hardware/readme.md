@@ -8,6 +8,8 @@ docker run --network=prometheus -d -p 9091:9091 prom/pushgateway
 ```
 while true; do ./push-metrics.py ;  sleep 5 ; done
 ```
+После чего нужно зайти на `localhost:9091` и проверить, что там есть нужные метрики (`temperature`, `cpu_load`, `mem_load`).
+
 После этого нужно узнать ip адрес контейнера пуш шлюза при помощи команды `docker network inspect prometheus` и заменить на него ip адрес в последней строчке файла `prometheus.yml`. После этого можно запускать контейнеры с `Prometheus` и `Grafana`:
 ```
 docker run --network=prometheus -d -p 9090:9090 -v <full path to file>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
