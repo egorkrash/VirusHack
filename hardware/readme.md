@@ -15,6 +15,7 @@ while true; do ./push-metrics.py ;  sleep 5 ; done
 docker run --network=prometheus -d -p 9090:9090 -v <full path to file>/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
 docker run --network=prometheus -d -p 3000:3000 grafana/grafana
 ```
+Надо зайти на `localhost:9090` и проверить, что нужные метрики поступают в `Prometheus` из пуш шлюза.
 ## Работа с Grafana
 Заходим в браузере в `Grafana` на `localhost:3000` и там подключаем `Prometheus` в качестве источника данных. Адрес сервера `Prometheus` вводим как `http://ip:9090`, где `ip` - это адрес контейнера `Prometheus`, который можно опять же увидеть при помощи команды `docker network inspect prometheus` (не путать с контейнером пуш шлюза).
 
