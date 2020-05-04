@@ -36,7 +36,6 @@ function get_graph({state, y_name}) {
       />
     </LineChart>
   )
-
 }
 
 
@@ -44,7 +43,7 @@ function RadiusMonitor() {
   const [state, set_state] = useState({data: []});
 
   if (state.data.length === 0) {
-    fetch('http://localhost:4500/get_snmp_data', {method: 'GET'})
+    fetch('http://localhost:4500/get_real_and_pred_data', {method: 'POST'})
       .then(response => response.json())
       .then(data => {
         const { xticks, temp, mem, cpu } = data;
