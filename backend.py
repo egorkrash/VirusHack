@@ -87,10 +87,10 @@ def get_snmp_data():
         return 'only get request is allowed'
 
     
-@app.route('/get_alert_commutators', methods=['POST'])
-def get_alert_commutators():
+@app.route('/get_alert_users', methods=['POST'])
+def get_alert_users():
     """
-    Get data of alert commutators.
+    Get data of alert users.
     """
     if request.method == 'POST':
         entry = json.loads(request.data)
