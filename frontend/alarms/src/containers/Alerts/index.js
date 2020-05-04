@@ -5,10 +5,43 @@ import './App.css';
 import data_alarms from "./data/alarms";
 import defaults from "./config";
 
-function App() {
+
+async function fetch_real_and_pred_data({target_name}) {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({"target": target_name})
+  };
+
+  fetch('http://localhost:4500/get_real_and_pred_data', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      alert(1);
+      alert(data['xticks'].join(' '))
+      // this.setState({ postId: data.id })
+    });
+}
+
+
+function Alerts() {
   const { current, history } = data_alarms;
 
   const [state, set_state] = useState({a: 1})
+
+
+
+
+
+
+
+  // fetch('localhost/get_real_and_pred_data')
+  //   .then(response => {
+  //     // alert(1)
+  //     return response.json()
+  //   }).then( data => {
+  //     alert(data)
+  //   });
+
+
 
   let alarms_current = [];
   for (const current_alarm of current) {
@@ -48,4 +81,4 @@ function App() {
   );
 }
 
-export default App;
+export default Alerts;
