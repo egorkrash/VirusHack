@@ -56,4 +56,10 @@ def get_alert_dict(data, hour,
             resdict['tr_out_max_alert'][0].append(logins[i])
             resdict['tr_out_max_alert'][1].append(int(output_trafic[i]))
             
+    # sorting
+    for key, value in resdict.items():
+        if len(value[0]) == 0:
+            continue
+        resdict[key] = list(zip(*sorted(zip(value[0], value[1]), key=lambda x: x[1], reverse=True)))
+            
     return resdict
