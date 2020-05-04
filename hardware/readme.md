@@ -19,3 +19,10 @@ docker run --network=prometheus -d -p 3000:3000 grafana/grafana
 Заходим в браузере в `Grafana` на `localhost:3000` и там подключаем `Prometheus` в качестве источника данных. Адрес сервера `Prometheus` вводим как `http://ip:9090`, где `ip` - это адрес контейнера `Prometheus`, который можно опять же увидеть при помощи команды `docker network inspect prometheus` (не путать с контейнером пуш шлюза).
 
 Далее в `Grafana` создаём дэшборд и добавляем в него три панели с запросом, содержащим только имя метрики. По одной панели на каждую из метрик - `temperature`, `cpu_load`, `mem_load`). Выставляем обновление на 10 секунд, подбираем глубину истории для отображения метрик. Имя панели можно изменить через JSON панели.
+## Встраивание дашборда Grafana на фронтенд
+```
+<iframe 
+    src="https://snapshot.raintank.io/dashboard-solo/snapshot/y7zwi2bZ7FcoTlB93WN7yWO4aMiz3pZb?from=1493369923321&to=1493377123321&panelId=4" 
+    width="650" height="300" frameborder="0">
+</iframe>
+```
