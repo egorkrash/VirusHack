@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 5s
+  scrape_timeout: 4s
+  evaluation_interval: 5s
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: []
+    scheme: http
+    timeout: 4s
+    api_version: v1
+scrape_configs:
+- job_name: batchB
+  honor_labels: true
+  honor_timestamps: true
+  scrape_interval: 5s
+  scrape_timeout: 4s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - 172.19.0.4:9091
