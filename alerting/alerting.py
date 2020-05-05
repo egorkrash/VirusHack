@@ -3,9 +3,8 @@ import pandas as pd
 import telebot
 
 bot = telebot.TeleBot('1029001716:AAGHzYsNcN33ZiGqq9Ubn4c5Wee1Qiu9MHA')
-path_id_list = 'bot_id_list'
-data = pd.read_csv('../../Data/gb_userlogin_hour.csv')
-data = data[~((data.input_trafic == 0) & (data.output_trafic == 0))]
+path_id_list = 'alerting/bot_id_list'
+
 
 def get_alert_dict(data, hour, send_telegram=True,
                    thrld_failed=2, thrld_stops=5,
@@ -54,6 +53,12 @@ def get_alert_dict(data, hour, send_telegram=True,
         if mask_tr_out_max[i]:
             resdict['tr_out_max_alert'][0].append(logins[i])
             resdict['tr_out_max_alert'][1].append(int(output_trafic[i]))
+    
+    # sorting
+    for key, value in resdict.items():
+        if len(value[0]) == 0:
+            continue
+        resdict[key] = list(zip(*sorted(zip(value[0], value[1]), key=lambda x: x[1], reverse=True)))
 
     if send_telegram:
         send_info(resdict, hour)
@@ -64,7 +69,7 @@ def send_info(info_dict, date):
     with open(path_id_list, 'r') as f:
         id_list = [int(x.strip()) for x in f.readlines()]
     
-    
+    print('hi')
     num_failed = len(info_dict['failed_alert'][0])
     num_stops = len(info_dict['stops_alert'][0])
     num_zero_in_tr = len(info_dict['tr_inp_zero_alert'][0])
