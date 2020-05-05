@@ -2,7 +2,7 @@ from collections import defaultdict
 import pandas as pd
 import telebot
 
-ibot = telebot.TeleBot('1029001716:AAGHzYsNcN33ZiGqq9Ubn4c5Wee1Qiu9MHA')
+bot = telebot.TeleBot('1029001716:AAGHzYsNcN33ZiGqq9Ubn4c5Wee1Qiu9MHA')
 path_id_list = 'alerting/bot_id_list'
 
 
