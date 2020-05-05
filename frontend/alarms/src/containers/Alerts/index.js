@@ -16,6 +16,7 @@ function get_alarm_bar({data, title}) {
         <Button
           style={{width: '100%', marginBottom:3, marginTop:3, marginLeft:6, marginRight:6}}
           color={"danger"}
+          href={`/user_detail?userlogin=${users[i]}`}
         >
           <span style={{float: "left"}}>{users[i]}</span>
           <span style={{float: "right"}}><b>{values[i]}</b></span>

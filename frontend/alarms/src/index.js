@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import SnmpMonitor from './containers/SnmpMonitor';
 import RadiusMonitor from './containers/RadiusMonitor';
 import NotFoundPage from "./pages/NotFound";
+import AlertDetail from "./components/AlarmDetail";
 
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/snmp" component={SnmpMonitor} />
       <Route path="/radius" component={RadiusMonitor} />
+      <Route path="/user_detail" component={AlertDetail} />
       <Route path="/" component={Alarms} exact />
       <Route component={NotFoundPage}/>
     </Switch>

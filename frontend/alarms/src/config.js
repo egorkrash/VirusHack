@@ -78,7 +78,24 @@ const defaults = {
     "mean_input_trafic": "Input Traffic",
     "mean_output_trafic": "Output Traffic",
     "count_failed": "Count Failed",
-  }
+  },
+  detail_alert_example: [
+    ["2020-04-30 23:38:33", "Authentication", "-", "9usLa9HA-W8@dhcp", "89.239.189.1", "70:2e:22:6b:41:c5", "-", "OK", "0.09", "-", "-"],
+    ["2020-04-30 23:38:33", "Accounting", "-", "9usLa9HA-W8@dhcp", "89.239.189.1", "70:2e:22:6b:41:c5", "Start", "OK", "0.06", "-", "-"],
+    ["2020-04-30 23:38:34", "Accounting", "2", "9usLa9HA-W8@dhcp", "-", "-", "Start", "OK", "0.01", "-", "-"],
+    ["2020-04-30 23:38:34", "Accounting", "3", "9usLa9HA-W8@dhcp", "-", "-", "Start", "OK", "0.01", "-", "-"],
+    ["2020-04-30 23:38:34", "Accounting", "4", "9usLa9HA-W8@dhcp", "-", "-", "Start", "OK", "0.01", "-", "-"],
+    ["2020-04-30 23:38:34", "Accounting", "1", "9usLa9HA-W8@dhcp", "-", "-", "Start", "OK", "0.01", "-", "-"],
+    ["2020-04-30 23:38:34", "Accounting", "6", "9usLa9HA-W8@dhcp", "-", "-", "Start", "OK", "0.01", "-", "-"],
+    ["2020-04-30 23:38:34", "Accounting", "5", "9usLa9HA-W8@dhcp", "-", "-", "Start", "OK", "0.01", "-", "-"],
+    ["2020-04-30 23:55:36", "Accounting", "-", "9usLa9HA-W8@dhcp", "-", "-", "-", "OK Skiped due to traffic limit", "-", "-", "-"],
+    ["2020-04-30 23:55:36", "Accounting", "-", "9usLa9HA-W8@dhcp", "-", "-", "-", "OK Skiped due to traffic limit", "-", "-", "-"],
+    ["2020-04-30 23:55:36", "Accounting", "-", "9usLa9HA-W8@dhcp", "-", "-", "-", "OK Skiped due to traffic limit", "-", "-", "-"],
+    ["2020-04-30 23:55:36", "Accounting", "-", "9usLa9HA-W8@dhcp", "-", "-", "-", "OK Skiped due to traffic limit", "-", "-", "-"],
+    ["2020-04-30 23:55:36", "Accounting", "-", "9usLa9HA-W8@dhcp", "-", "-", "-", "OK Skiped due to traffic limit", "-", "-", "-"],
+    ["2020-04-30 23:55:36", "Accounting", "-", "9usLa9HA-W8@dhcp", "89.239.189.1", "70:2e:22:6b:41:c5", "Stop", "FAILED Tarification error.", "0.138", "62941", "34062"],
+    ["2020-04-30 23:55:36", "Accounting", "5", "9usLa9HA-W8@dhcp", "89.239.189.1", "70:2e:22:6b:41:c5", "Stop", "OK", "0.189", "62941", "34062"]
+  ]
 };
 
 export default defaults;
