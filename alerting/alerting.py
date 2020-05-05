@@ -2,8 +2,8 @@ from collections import defaultdict
 import pandas as pd
 import telebot
 
-#bot = telebot.TeleBot('1029001716:AAGHzYsNcN33ZiGqq9Ubn4c5Wee1Qiu9MHA')
-#path_id_list = 'alerting/bot_id_list'
+ibot = telebot.TeleBot('1029001716:AAGHzYsNcN33ZiGqq9Ubn4c5Wee1Qiu9MHA')
+path_id_list = 'alerting/bot_id_list'
 
 
 def get_alert_dict(data, hour, send_telegram=True,
@@ -67,8 +67,8 @@ def get_alert_dict(data, hour, send_telegram=True,
             continue
         resdict[key] = list(zip(*sorted(zip(value[0], value[1]), key=lambda x: x[1], reverse=True)))
 
-#    if send_telegram:
-#        send_info(resdict, hour)
+    if send_telegram:
+        send_info(resdict, hour)
     return resdict
 
 
