@@ -135,6 +135,9 @@ sample value:
 "tr_out_zero_alert" : [list_of_users, list_of_values]
 }
 ```
+### Run Telegram Bot
+Запустить отдельным процессом из папки `alerting` команду `python static_bot_runner.py` 
+
 ## Frontend Instructions
 ### Подготовка
 - Установить `nvm` (перелогиниться после этого): `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash`
