@@ -67,7 +67,10 @@ def get_alert_dict(data, hour, send_telegram=True,
 
 def send_info(info_dict, date):
     with open(path_id_list, 'r') as f:
-        id_list = [int(x.strip()) for x in f.readlines()]
+        try:
+            id_list = [int(x.strip()) for x in f.readlines()]
+        except ValueError:
+            id_list = ''
     
     print('hi')
     num_failed = len(info_dict['failed_alert'][0])
