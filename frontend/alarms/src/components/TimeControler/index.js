@@ -27,7 +27,7 @@ const TimeControler = ({hour, set_hour, fetchDone}) => {
         <Col style={{width: "100%"}}>
           <Slider
             min={0}
-            max={24}
+            max={23}
             value={hour.hour}
             onChange={(value) => handleChange(value)}
           />

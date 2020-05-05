@@ -39,7 +39,46 @@ const defaults = {
     'type__count_Billing-Accounting', 'type__count_Billing-Authentication',
     'mean_delay', 'mean_input_trafic', 'mean_output_trafic',
     'count_failed'
-  ]
+  ],
+  data_forecasting: [{
+    "xticks": [],
+    "start_stop_alige_count_Start_pred": [],
+    "start_stop_alige_count_Stop_pred": [],
+    "type__count_Billing-Accounting_pred": [],
+    "type__count_Billing-Authentication_pred": [],
+    "mean_delay_pred": [],
+    "mean_input_trafic_pred": [],
+    "mean_output_trafic_pred": [],
+    "count_failed_pred": [],
+    "start_stop_alige_count_Start": [],
+    "start_stop_alige_count_Stop": [],
+    "type__count_Billing-Accounting": [],
+    "type__count_Billing-Authentication": [],
+    "mean_delay": [],
+    "mean_input_trafic": [],
+    "mean_output_trafic": [],
+    "count_failed": []
+  }],
+  data_forecasting_error_std: {
+    "start_stop_alige_count_Start": 6000,
+    "start_stop_alige_count_Stop": 5000,
+    "type__count_Billing-Accounting": 36000,
+    "type__count_Billing-Authentication": 3000,
+    "mean_delay": 0.02,
+    "mean_input_trafic": 300,
+    "mean_output_trafic": 2200,
+    "count_failed": 220,
+  },
+  data_forecasting_title: {
+    "start_stop_alige_count_Start": "Count Start",
+    "start_stop_alige_count_Stop": "Count Stop",
+    "type__count_Billing-Accounting": "Count Billing Accounting",
+    "type__count_Billing-Authentication": "Count Billing Authentication",
+    "mean_delay": "Mean Delay",
+    "mean_input_trafic": "Input Traffic",
+    "mean_output_trafic": "Output Traffic",
+    "count_failed": "Count Failed",
+  }
 };
 
 export default defaults;

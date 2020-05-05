@@ -65,18 +65,14 @@ function SnmpMonitor() {
       <Header />
       <Container>
         <Col>
-          <iframe
-            src="https://snapshot.raintank.io/dashboard-solo/snapshot/y7zwi2bZ7FcoTlB93WN7yWO4aMiz3pZb?from=1493369923321&to=1493377123321&panelId=4"
-            width="650" height="300" frameBorder="0">
-          </iframe>
-          {/*{graph_temp}*/}
+          {graph_temp}
         </Col>
-        {/*<Col>*/}
-        {/*  {graph_mem}*/}
-        {/*</Col>*/}
-        {/*<Col>*/}
-        {/*  {graph_cpu}*/}
-        {/*</Col>*/}
+        <Col>
+          {graph_mem}
+        </Col>
+        <Col>
+          {graph_cpu}
+        </Col>
       </Container>
     </div>
   );

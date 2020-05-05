@@ -56,7 +56,7 @@ const Alerts = () => {
     tr_inp_zero_alert: [[], []],
     tr_out_zero_alert: [[], []]
   });
-  const [hour, set_hour] = useState({hour: 24});
+  const [hour, set_hour] = useState({hour: 23});
   const [fetchDone, set_fetchDone] = useState(true)
 
   useEffect(() => {

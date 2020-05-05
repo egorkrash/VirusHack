@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import numpy as np
 import pickle as pkl
-from utils import get_alert_dict
+from alerting.alerting import get_alert_dict
 from flask import Flask, request, Response, send_file
 
 from time_series_forecasting.forecasting import make_predictions, load_models
@@ -120,7 +120,7 @@ def get_alert_users():
         hour = entry['hour']
         
         
-        alerts = get_alert_dict(data_alert, hour)
+        alerts = get_alert_dict(data_alert, hour, send_telegram=True)
         
         
         json_data = json.dumps(alerts)
