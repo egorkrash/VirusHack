@@ -17,7 +17,7 @@ const Header = () => {
           <Button href="/" color="info" style={{width: "60%"}} >Alerts</Button>
         </Col>
         <Col>
-          <Button href="/snmp" color="info" style={{width: "60%"}}>Snmp Monitor</Button>
+          <Button href="/snmp" color="info" style={{width: "60%"}}>SNMP Monitor</Button>
         </Col>
         <Col>
           <Button href="/radius"  color="info" style={{width: "60%"}}>Radius Monitor</Button>
