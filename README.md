@@ -136,7 +136,7 @@ sample value:
 }
 ```
 ### Run Telegram Bot
-Запустить отдельным процессом из папки `alerting` команду `python static_bot_runner.py` 
+Запустить отдельным фоновым процессом из папки `alerting` команду `python static_bot_runner.py`. Для корректной работы может понадобиться VPN.
 
 ## Frontend Instructions
 ### Подготовка
